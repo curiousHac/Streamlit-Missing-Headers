@@ -6,10 +6,17 @@ def check_response_headers(url):
         response = requests.get(url)
         if response.status_code == 200:
             missing_headers = []
-            required_headers = ["X-Frame-Options", "X-Content-Type-Options", "Strict-Transport-Security", "Content-Security-Policy", "Referrer-Policy"]
+            required_headers = [
+                "X-Frame-Options", 
+                "X-Content-Type-Options", 
+                "Strict-Transport-Security", 
+                "Content-Security-Policy", 
+                "Referrer-Policy"
+            ]
             for header in required_headers:
                 if header not in response.headers:
                     missing_headers.append(header)
+            
             if missing_headers:
                 return f"Missing headers: {', '.join(missing_headers)}"
             else:
